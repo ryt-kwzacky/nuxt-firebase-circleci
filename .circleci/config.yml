@@ -1,13 +1,13 @@
 version: 2.1
 jobs:
-  deploy:
+  build:
     docker:
       - image: circleci/node:10.7
     steps:
       - checkout
       - run:
-        name: Install firebase-tools
-        command: yarn add --dev firebase-tools
+          name: Install firebase-tools
+          command: yarn add --dev firebase-tools
       - run:
           name: Yarn Install
           command: yarn
@@ -22,7 +22,7 @@ workflows:
   version: 2.1
   deployment:
     jobs:
-      - deploy:
+      - build:
           filters:
             branches:
               only: master
