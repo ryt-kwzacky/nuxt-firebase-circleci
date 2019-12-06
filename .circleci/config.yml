@@ -1,0 +1,28 @@
+version: 2.1
+jobs:
+  deploy:
+    docker:
+      - image: circleci/node:10.7
+    steps:
+      - checkout
+      - run:
+        name: Install firebase-tools
+        command: yarn add --dev firebase-tools
+      - run:
+          name: Yarn Install
+          command: yarn
+      - run:
+          name: Build
+          command: yarn generate
+      - run:
+          name: Deploy to Firebase Hosting
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+
+workflows:
+  version: 2.1
+  deployment:
+    jobs:
+      - deploy:
+          filters:
+            branches:
+              only: master
