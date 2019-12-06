@@ -6,7 +6,7 @@
         nuxt-firebase-circleci
       </h1>
       <h2 class="subtitle">
-        My amazing Nuxt.js project!!!
+        Master Branch
       </h2>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">

@@ -1,6 +1,6 @@
 version: 2.1
 jobs:
-  build:
+  deploy-dev:
     docker:
       - image: circleci/node:10.15
     steps:
@@ -16,13 +16,36 @@ jobs:
           command: yarn generate
       - run:
           name: Deploy to Firebase Hosting
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+					command: ./node_modules/.bin/firebase deploy --project dev --token=$FIREBASE_TOKEN
+					
+	deploy-prod:
+    docker:
+      - image: circleci/node:10.15
+    steps:
+      - checkout
+      - run:
+          name: Install firebase-tools
+          command: yarn add --dev firebase-tools
+      - run:
+          name: Yarn Install
+          command: yarn
+      - run:
+          name: Build
+          command: yarn generate
+      - run:
+          name: Deploy to Firebase Hosting
+          command: ./node_modules/.bin/firebase deploy --project prod --token=$FIREBASE_TOKEN
+
 
 workflows:
   version: 2.1
   deployment:
     jobs:
-      - build:
+      - deploy-dev:
+          filters:
+            branches:
+							only: develop
+			- deploy-dev:
           filters:
             branches:
               only: master
