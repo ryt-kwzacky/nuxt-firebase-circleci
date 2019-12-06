@@ -16,9 +16,9 @@ jobs:
           command: yarn generate
       - run:
           name: Deploy to Firebase Hosting
-					command: ./node_modules/.bin/firebase deploy --project dev --token=$FIREBASE_TOKEN
-					
-	deploy-prod:
+          command: ./node_modules/.bin/firebase deploy --project dev --token=$FIREBASE_TOKEN
+
+  deploy-prod:
     docker:
       - image: circleci/node:10.15
     steps:
@@ -44,8 +44,8 @@ workflows:
       - deploy-dev:
           filters:
             branches:
-							only: develop
-			- deploy-dev:
+              only: develop
+      - deploy-dev:
           filters:
             branches:
               only: master
