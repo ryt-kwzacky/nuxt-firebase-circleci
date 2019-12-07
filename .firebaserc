@@ -1,6 +1,7 @@
 {
   "projects": {
     "dev": "nuxt-firebase-circleci-test",
-    "prod": "nuxt-firebase-circleci-test2"
+    "prod": "nuxt-firebase-circleci-test2",
+    "default": "nuxt-firebase-circleci-test"
   }
 }
